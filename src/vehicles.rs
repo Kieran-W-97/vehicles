@@ -21,13 +21,15 @@ pub struct VehicleState {
 pub trait Vehicle {
     fn new(_name: &'static str) -> Self;
 
-    fn vehicle_state(&mut self) -> &mut VehicleState;
+    fn mut_vehicle_state(&mut self) -> &mut VehicleState;
+
+    fn vehicle_state(&self) -> &VehicleState;
 
     fn ignition(&mut self) {
-        self.vehicle_state().ignition_on = true;
+        self.mut_vehicle_state().ignition_on = true;
     }
 
-    fn drive(&mut self) {
+    fn drive(&self) {
         if !self.vehicle_state().ignition_on {
             println!("Ignition Off, Cannot Drive.");
         } else {
@@ -39,8 +41,7 @@ pub trait Vehicle {
         String::from("Vroom")
     }
 
-    // is there a way to remove the 'mut' here -> in C++ speak this method should be const.
-    fn speedometer(&mut self) -> String {
+    fn speedometer(&self) -> String {
         if self.vehicle_state().ignition_on {
             match self.vehicle_state().speed {
                 Speed::Fast => String::from("200km/h"),
@@ -69,7 +70,11 @@ impl Vehicle for Tractor {
         }
     }
 
-    fn vehicle_state(&mut self) -> &mut VehicleState {
+    fn mut_vehicle_state(&mut self) -> &mut VehicleState {
         &mut self.vehicle_state
+    }
+
+    fn vehicle_state(&self) -> &VehicleState {
+        &self.vehicle_state
     }
 }
