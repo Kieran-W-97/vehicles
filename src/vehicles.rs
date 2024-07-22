@@ -6,17 +6,19 @@ enum Speed {
 }
 
 enum Color {
-    Red, Green, Blue, Yellow
+    Red,
+    Green,
+    Blue,
+    Yellow,
 }
 
 pub struct VehicleState {
-    speed : Speed,
-    color : Color,
-    ignition_on : bool,
+    speed: Speed,
+    color: Color,
+    ignition_on: bool,
 }
 
 pub trait Vehicle {
-
     fn new(_name: &'static str) -> Self;
 
     fn vehicle_state(&mut self) -> &mut VehicleState;
@@ -46,25 +48,24 @@ pub trait Vehicle {
                 Speed::Slow => String::from("50km/h"),
                 Speed::MikeSpeed => String::from("undetectable speed."),
             }
-        }
-        else {
+        } else {
             String::from("0 km/h")
         }
     }
 }
 
 pub struct Tractor {
-    vehicle_state : VehicleState
+    vehicle_state: VehicleState,
 }
 
 impl Vehicle for Tractor {
     fn new(_name: &'static str) -> Tractor {
         Tractor {
             vehicle_state: VehicleState {
-                speed : Speed::MikeSpeed,
-                color : Color::Green,
-                ignition_on : false,
-            }
+                speed: Speed::MikeSpeed,
+                color: Color::Green,
+                ignition_on: false,
+            },
         }
     }
 

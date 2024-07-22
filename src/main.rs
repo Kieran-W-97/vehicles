@@ -7,7 +7,7 @@ fn main() {
     hello_world::say_hello();
 
     // Vehicle Traits test.
-    let mut tractor : vehicles::Tractor = vehicles::Vehicle::new("Trevor");
+    let mut tractor: vehicles::Tractor = vehicles::Vehicle::new("Trevor");
     tractor.drive();
     tractor.ignition();
     tractor.drive();
