@@ -9,7 +9,7 @@ enum Color {
     Red, Green, Blue, Yellow
 }
 
-struct VehicleState {
+pub struct VehicleState {
     speed : Speed,
     color : Color,
     ignition_on : bool,
@@ -17,7 +17,7 @@ struct VehicleState {
 
 pub trait Vehicle {
 
-    fn new(name: &'static str) -> Self;
+    fn new(_name: &'static str) -> Self;
 
     fn vehicle_state(&mut self) -> &mut VehicleState;
 
@@ -36,7 +36,7 @@ pub trait Vehicle {
     fn vroom(&self) -> String {
         String::from("Vroom")
     }
-    
+
     // is there a way to remove the 'mut' here -> in C++ speak this method should be const.
     fn speedometer(&mut self) -> String {
         if self.vehicle_state().ignition_on {
@@ -58,7 +58,7 @@ pub struct Tractor {
 }
 
 impl Vehicle for Tractor {
-    fn new(name: &'static str) -> Tractor {
+    fn new(_name: &'static str) -> Tractor {
         Tractor {
             vehicle_state: VehicleState {
                 speed : Speed::MikeSpeed,
